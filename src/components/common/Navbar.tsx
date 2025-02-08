@@ -8,13 +8,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, X, Menu } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export function NavBar() {
+interface NavBarProps {
+  onChapterClick: (index: number) => void;
+}
+
+export function NavBar({ onChapterClick }: NavBarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [showChapters, setShowChapters] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,15 +54,63 @@ export function NavBar() {
             <Link to="/#home" className="font-semibold  ">
               Home
             </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1   ">
+            <DropdownMenu open={open} onOpenChange={setOpen}>
+              <DropdownMenuTrigger className="flex items-center gap-1">
                 Chapters <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="font-fuzzy-bubbles ">
-                <DropdownMenuItem>Chapter 1</DropdownMenuItem>
-                <DropdownMenuItem>Chapter 2</DropdownMenuItem>
-                <DropdownMenuItem>Chapter 3</DropdownMenuItem>
-                <DropdownMenuItem>Chapter 4</DropdownMenuItem>
+              <DropdownMenuContent className="font-fuzzy-bubbles">
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/#chapter-one"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(1);
+                    }}
+                  >
+                    Chapter 1
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/#chapter-two"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(2);
+                    }}
+                  >
+                    Chapter 2
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/#chapter-three"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(3);
+                    }}
+                  >
+                    Chapter 3
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/#chapter-four"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(4);
+                    }}
+                  >
+                    Chapter 4
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <Link to="/how-to-buy" className="">
@@ -117,22 +169,65 @@ export function NavBar() {
           </Link>
 
           <div className="relative">
-            {/* <button onClick={() => setShowChapters(!showChapters)} className="flex items-center gap-2">
-                Chapters <ChevronDown className="w-4 h-4" />
-              </button> */}
-            {/* {showChapters && ( */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1   ">
+              <DropdownMenuTrigger className="flex items-center gap-1">
                 Chapters <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="font-fuzzy-bubbles ">
-                <DropdownMenuItem>Chapter 1</DropdownMenuItem>
-                <DropdownMenuItem>Chapter 2</DropdownMenuItem>
-                <DropdownMenuItem>Chapter 3</DropdownMenuItem>
-                <DropdownMenuItem>Chapter 4</DropdownMenuItem>
+              <DropdownMenuContent className="font-fuzzy-bubbles">
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/chapter-one"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(1);
+                    }}
+                  >
+                    Chapter 1
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/chapter-two"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(2);
+                    }}
+                  >
+                    Chapter 2
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/chapter-three"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(3);
+                    }}
+                  >
+                    Chapter 3
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/chapter-four"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      setOpen(false);
+                      onChapterClick(4);
+                    }}
+                  >
+                    Chapter 4
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* )} */}
           </div>
 
           <Link to="/how-to-buy">How To Buy</Link>
@@ -166,7 +261,7 @@ export function NavBar() {
           </DropdownMenu>
         </div>
       </div>
-      <Marquee className="bg-black h-10 px-2 text-lg font-bold" pauseOnHover>
+      <Marquee className="hidden lg:flex bg-black h-10 px-2 text-lg font-bold" pauseOnHover>
         <div className="text-[#33ff00]">
           <span className="text-red-500 mx-2">BREAKING:</span> $WEPE Crypto Presale Is Cooking - Buy Before Price
           Increases!

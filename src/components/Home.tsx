@@ -82,7 +82,7 @@ const Home = () => {
                 src="https://wallstreetpepe.com/assets/images/svg-icons/arrow-banner.svg"
                 alt="join-arrow-button"
               />
-              <Link to={"/#how-to-buy"}>
+              <Link to={"/chapter-one"}>
                 <img
                   className="h-36 w-36 cursor-pointer"
                   src="https://wallstreetpepe.com/assets/images/svg-icons/home_arrow.svg"
