@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CountdownTimer } from "@/components/common/countdown-timer";
 import { WalletModal } from "../buy-modal/wallet-modal";
+import { DontHaveModal } from "../buy-modal/dont-have-btn";
 
 export interface WalletOption {
   id: string;
@@ -12,6 +13,7 @@ export function BuyCard() {
     setIsOpen(true);
   };
   const [isOpen, setIsOpen] = useState(false);
+  const [isDontOpen, setIsDontOpen] = useState(false);
 
   const walletOptions: WalletOption[] = [
     {
@@ -39,7 +41,7 @@ export function BuyCard() {
   const handleWalletConnect = (walletId: string) => {
     console.log(`Connecting to ${walletId}`);
     // Implement wallet connection logic here
-    setIsOpen(false);
+    setIsDontOpen(false);
   };
   return (
     <div className="flex gap-2">
@@ -88,9 +90,12 @@ export function BuyCard() {
             </div>
           </div>
         </div>
-        <a href="#" className="block text-center text-sm text-blue-600 hover:underline mt-24">
+        <div
+          onClick={() => setIsDontOpen(true)}
+          className="block text-center text-sm text-blue-600 hover:underline mt-24"
+        >
           Don't Have A Wallet?
-        </a>
+        </div>
         {/* <div className="absolute -right-4 -bottom-4 bg-green-400 text-black text-sm font-bold p-2 rounded-full transform rotate-12">
         27% REWARDS
       </div> */}
@@ -99,6 +104,12 @@ export function BuyCard() {
           onClose={() => setIsOpen(false)}
           onWalletConnect={handleWalletConnect}
           walletOptions={walletOptions}
+        />
+        <DontHaveModal
+          isOpen={isDontOpen}
+          onClose={() => setIsDontOpen(false)}
+          // onWalletConnect={handleWalletConnect}
+          // walletOptions={walletOptions}
         />
       </div>
       <div className="hidden md:block">
