@@ -2,6 +2,7 @@ import { Wallet } from "lucide-react";
 import { WalletOption } from "@/types";
 import { WalletButton } from "./wallet-button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Link } from "react-router";
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -32,13 +33,13 @@ export function WalletModal({ isOpen, onClose, onWalletConnect, walletOptions }:
           ))}
         </div>
 
-        <button
-          onClick={() => onWalletConnect("no-wallet")}
+        <Link
+          to={"https://community.trustwallet.com/signup"}
           className="w-full mt-4 bg-[#e9d5ff] rounded-xl p-4 flex items-center justify-center space-x-2 hover:bg-[#dcc6f0] transition-colors"
         >
           <Wallet className="w-5 h-5" />
           <span className="font-comic">I Don't Have A Wallet</span>
-        </button>
+        </Link>
       </DialogContent>
     </Dialog>
   );
